@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BSE - Equities</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h4 class="panel-heading clearfix">
+        BSE Bhav Data
+    </h4>
+    <hr/>
+    <div class="row mb-3">
+        <div class="col-lg-12">
+            <button id="update_btn" class="btn btn-primary float-right">
+                <i id="update_spinner" class="fa fa-spinner fa-spin" style="display:none;"></i>
+                Update Price
+            </button>
+        </div>
+    </div>
+
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>SC_CODE</th>
+            <th>SC_NAME</th>
+            <th>HIGH</th>
+            <th>LOW</th>
+            <th>CLOSE</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>SC_CODE</th>
+            <th>SC_NAME</th>
+            <th>HIGH</th>
+            <th>LOW</th>
+            <th>CLOSE</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            "ajax": '/equity_list',
+            "serverSide":true,
+            "ordering": false,
+            "columns": [
+                { "data": "sc_code" },
+                { "data": "sc_name" },
+                { "data": "high" },
+                { "data": "low" },
+                { "data": "close" },
+            ]
+        } );
+
+        $('#update_btn').click(function(e) {
+            $("#update_spinner").show();
+            $("#update_btn").attr("disabled", "disabled");
+            $.ajax({url: "/equity_update", success: function(result){
+                $("#update_btn").removeAttr("disabled");
+                $("#update_spinner").hide();
+            }});
+            e.preventDefault();
+        });
+
+    } );
+</script>
+</body>
+</html>
