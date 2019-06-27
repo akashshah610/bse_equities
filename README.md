@@ -1,9 +1,9 @@
 # BSE Equities
 App is designed to demonstrate use of redis as database. To run this application locally. 
 
-##Run locally
+## Run locally
 
-####Install Redis Server
+#### Install Redis Server
 ```
 sudo apt update
 sudo apt install redis-server
@@ -12,7 +12,7 @@ check the redis server status with
 ```
 sudo systemctl status redis
 ```
-####Setup the code
+#### Setup the code
 Clone git repository using 
 ```
 git clone git@github.com:akashshah610/bse_equities.git
