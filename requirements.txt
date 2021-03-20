@@ -3,5 +3,5 @@ python-box==3.4.1
 redis==3.2.1
 CherryPy==17.4.2
 requests==2.22.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 python-dotenv==0.10.3
